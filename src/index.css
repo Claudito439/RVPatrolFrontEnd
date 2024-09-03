@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+  :root {/* Gradiente base */
+    --gradient: linear-gradient(to top left, #0056b3, #ffd700);
+  
+    /* Fondo y primer plano */
+    --background: 210 50% 98%;
+    --foreground: 210 50% 10%;
+  
+    /* Colores mutados */
+    --muted: 210 40% 93%;
+    --muted-foreground: 210 40% 40%;
+  
+    /* Popover y tarjetas */
+    --popover: 210 45% 98%;
+    --popover-foreground: 210 45% 10%;
+    --card: 210 45% 98%;
+    --card-foreground: 210 45% 10%;
+  
+    /* Bordes e inputs */
+    --border: 210 40% 90%;
+    --input: 210 40% 90%;
+  
+    /* Color primario (azul) */
+    --primary: 210 100% 35%;
+    --primary-foreground: 210 100% 98%;
+  
+    /* Color secundario (amarillo suave) */
+    --secondary: 45 100% 75%;
+    --secondary-foreground: 45 100% 20%;
+  
+    /* Acento (azul claro) */
+    --accent: 210 80% 85%;
+    --accent-foreground: 210 80% 20%;
+  
+    /* Color destructivo */
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 0 100% 98%;
+  
+    /* Anillo de enfoque */
+    --ring: 210 100% 35%;
+  
+    /* Radio de borde */
+    --radius: 0.5rem;
+  
+    /* Colores para gráficos */
+    --chart-1: 210 100% 50%;
+    --chart-2: 210 80% 60%;
+    --chart-3: 210 60% 70%;
+    --chart-4: 45 100% 60%;
+    --chart-5: 45 80% 70%;
+  }
+
+  .dark {
+    /* Name: custom color palette
+       Author: Ilias Ism
+       URL: https://gradient.page */
+
+    /* CSS: .bg-gradient { background: var(--gradient) } */
+    --gradient: linear-gradient(to top left, #72C6EF, #004E8F);
+
+    --background: 212 52% 5.52%;
+    --foreground: 212 8% 98.45%;
+
+    --muted: 212 69.60000000000001% 24.839999999999996%;
+    --muted-foreground: 212 8% 56.9%;
+
+    --popover: 212 77.8% 10.35%;
+    --popover-foreground: 212 8% 98.45%;
+
+    --card: 212 77.8% 10.35%;
+    --card-foreground: 212 8% 98.45%;
+
+    --border: 212 69.60000000000001% 24.839999999999996%;
+    --input: 212 69.60000000000001% 24.839999999999996%;
+
+    --primary: 212 80% 69%;
+    --primary-foreground: 212 8% 6.8999999999999995%;
+
+    --secondary: 212 69.60000000000001% 24.839999999999996%;
+    --secondary-foreground: 212 8% 98.45%;
+
+    --accent: 212 69.60000000000001% 24.839999999999996%;
+    --accent-foreground: 212 8% 98.45%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 212 8% 98.45%;
+
+    --ring: 212 80% 69%;
+
+    --chart-1: 221.2 83.2% 53.3%;
+    --chart-2: 212 95% 68%;
+    --chart-3: 216 92% 60%;
+    --chart-4: 210 98% 78%;
+    --chart-5: 212 97% 87%;
+  }
+}
