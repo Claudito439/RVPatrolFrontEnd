@@ -8,7 +8,7 @@ import { PatrolLength } from "@/components/charts/PatrolLength";
 import { PatrolsArea } from "@/components/charts/PatrolsArea";
 import { RecognitionRadar } from "@/components/charts/RecognitionRadar";
 import UserSelect from "@/components/UserSelect";
-//hola
+
 export default function Dashboard() {
     const [selectedUser, setSelectedUser] = useState("all");
     const [ambushes, setAmbushes] = useState(null);

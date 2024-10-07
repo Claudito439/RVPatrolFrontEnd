@@ -18,4 +18,3 @@ export default function Modal({ isOpen, onClose, children, type }) {
         </div>
     );
 };
-//gola

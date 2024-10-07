@@ -18,4 +18,3 @@ export const getRecognition = async (userId) => userId === 'all'
 
 
 
-//holas
