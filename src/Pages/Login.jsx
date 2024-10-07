@@ -9,8 +9,8 @@ import Modal from '@/components/ui/Modal';
 
 const ErrorModal = ({ isOpen, onClose, message }) => (
     <Modal isOpen={isOpen} onClose={onClose} type="error">
-        <h2 className="text-2xl font-bold text-red-500 mb-4">Error</h2>
-        <p>{message}</p>
+        <h2 className="text-2xl text-center font-bold text-red-400 mb-4">Error</h2>
+        <p className='text-white'>{message}</p>
     </Modal>
 );
 
@@ -42,7 +42,7 @@ export default function Login() {
             setModalMessage('Ingreso exitoso!');
             setShowSuccessModal(true);
         } catch (error) {
-            setModalMessage('Contraseña o Email incorrectos.');
+            setModalMessage('Contraseña o Nombre de Usuario incorrectos.');
             setShowErrorModal(true);
         }
     });
@@ -65,7 +65,7 @@ export default function Login() {
                             <path fillRule="evenodd" d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" clipRule="evenodd" />
                         </svg>
 
-                        <input type="email" id="username" name="username" className=" rounded-lg bg-gradient-to-r from-blue-100 pl-12 py-2 md:py-4 focus:outline-none w-full" placeholder="Username" autoComplete="username"
+                        <input  id="username" name="username" className=" rounded-lg bg-gradient-to-r from-blue-100 pl-12 py-2 md:py-4 focus:outline-none w-full" placeholder="Username" autoComplete="username"
                             {...register('email', {
                                 required: {
                                     value: true, message: 'El usuario es requerido'
