@@ -6,7 +6,7 @@ import ErrorLabel from '@/components/ui/ErrorLabel';
 import Modal from '@/components/ui/Modal';
 
 
-
+//holas
 const ErrorModal = ({ isOpen, onClose, message }) => (
     <Modal isOpen={isOpen} onClose={onClose} type="error">
         <h2 className="text-2xl text-center font-bold text-red-400 mb-4">Error</h2>
