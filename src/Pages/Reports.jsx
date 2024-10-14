@@ -1,6 +1,7 @@
 import { getMaps } from "@/api/maps";
 import PatrullajesCard from "@/components/PratullajesCard";
 import ReportsCard from "@/components/ReportsCard";
+import { CardTitle } from "@/components/ui/card";
 import Title from "@/components/ui/title";
 import UserSelect from "@/components/UserSelect"; // Importa tu componente UserSelect
 import { useState, useEffect } from "react";
@@ -72,7 +73,7 @@ export default function Reports() {
                             checked={tasksEnabled} 
                             onChange={handleTaskCheckboxChange} 
                         />
-                        <span className="ml-2">Tareas</span>
+                        <CardTitle> Ver Tarea de Emboscadas </CardTitle>
                     </label>
                 </div>
             </div>
