@@ -1,7 +1,6 @@
 import { getMaps } from "@/api/maps";
 import PatrullajesCard from "@/components/PratullajesCard";
 import ReportsCard from "@/components/ReportsCard";
-import { CardTitle } from "@/components/ui/card";
 import Title from "@/components/ui/title";
 import UserSelect from "@/components/UserSelect"; // Importa tu componente UserSelect
 import { useState, useEffect } from "react";
@@ -66,14 +65,14 @@ export default function Reports() {
             <Title text="Reportes" />
             <div className="my-4 flex items-center">
                 <UserSelect onUserChange={handleUserChange} />
-                <div className="ml-4">
+                <div className="ml-4 bg-blue-500 text-white px-4 py-2 rounded">
                     <label>
                         <input 
                             type="checkbox" 
                             checked={tasksEnabled} 
                             onChange={handleTaskCheckboxChange} 
                         />
-                        <CardTitle> Ver Tarea de Emboscadas </CardTitle>
+                        <span className="ml-2 ">Tareas en Emboscada</span>
                     </label>
                 </div>
             </div>
