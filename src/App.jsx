@@ -12,6 +12,7 @@ import Login from "./Pages/Login";
 import { AuthProvider } from "./context/AuthProvider";
 import PrivateRoute from "./Pages/PrivateRoute";
 import Users from "./Pages/Users";
+import Ambushes from "./Pages/ReportAmbushTask";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
             path: "users",
             element: <Users />,
           },
+          {
+            path: "reporteTareas",
+            element: <Ambushes/>
+          }
         ]
       },
     ]

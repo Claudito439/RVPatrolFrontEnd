@@ -7,11 +7,11 @@ import { useState, useEffect } from "react";
 
 // Reportes iniciales sin el filtro de usuario
 const initialReports = [
-    { title: "Patrullaje", description: "Reporte de patrullajes", route: "/api/v1/reports/patrols" },
-    { title: "Reconocimiento", description: "Reporte de reconocimiento", route: "/api/v1/reports/recognitions" },
-    { title: "Emboscadas", description: "Reporte de emboscadas", route: "/api/v1/reports/ambushes" },
-    { title: "Combates", description: "Reportes de combates", route: "/api/v1/reports/combats" },
-    { title: "Usuarios", description: "Reportes de usuarios registrados", route: "/api/v1/reports/users" }
+    { title: "Patrullaje", description: "Reporte de patrullajes", route: "https://rvpatrolapibackend.onrender.com/api/v1/reports/patrols" },
+    { title: "Reconocimiento", description: "Reporte de reconocimiento", route: "https://rvpatrolapibackend.onrender.com/api/v1/reports/recognitions" },
+    { title: "Emboscadas", description: "Reporte de emboscadas", route: "https://rvpatrolapibackend.onrender.com/api/v1/reports/ambushes" },
+    { title: "Combates", description: "Reportes de combates", route: "https://rvpatrolapibackend.onrender.com/api/v1/reports/combats" },
+    { title: "Usuarios", description: "Reportes de usuarios registrados", route: "https://rvpatrolapibackend.onrender.com/api/v1/reports/users" }
 ];
 
 export default function Reports() {
@@ -26,18 +26,18 @@ export default function Reports() {
             if (report.title === "Emboscadas") {
                 if (tasksEnabled) {
                     return userId === "all" 
-                        ? { ...report, route: `/api/v1/reports/ambushtask` }
-                        : { ...report, route: `/api/v1/reports/ambushtask?userId=${userId}` };
+                        ? { ...report, route: `/reporteTareas` }
+                        : { ...report, route: `/reporteTareas` };
                 } else {
                     return userId === "all" 
-                        ? { ...report, route: `/api/v1/reports/ambushes` }
-                        : { ...report, route: `/api/v1/reports/ambushesu?userId=${userId}` };
+                        ? { ...report, route: `https://rvpatrolapibackend.onrender.com/api/v1/reports/ambushes` }
+                        : { ...report, route: `https://rvpatrolapibackend.onrender.com/api/v1/reports/ambushesu?userId=${userId}` };
                 }
             }
             if (report.title === "Combates") {
                 return userId === "all" 
-                    ? { ...report, route: `/api/v1/reports/combats` }
-                    : { ...report, route: `/api/v1/reports/combatsu?userId=${userId}` };
+                    ? { ...report, route: `https://rvpatrolapibackend.onrender.com/api/v1/reports/combats` }
+                    : { ...report, route: `https://rvpatrolapibackend.onrender.com/api/v1/reports/combatsu?userId=${userId}` };
             }
             // Las demás rutas permanecen sin cambios
             return report;

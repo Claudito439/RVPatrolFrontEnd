@@ -22,29 +22,40 @@ export default function UserSelect({ onUserChange }) {
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [value, setValue] = useState("");
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState(""); // Manejo del input de búsqueda
 
+  // Obtiene la lista de usuarios al cargar el componente
   useEffect(() => {
     async function fetchUsers() {
       try {
         const response = await getUsers();
-        const userData = Array.isArray(response.data) ? response.data.map(user => ({
-          ...user,
-          fullName: `${user.name} ${user.lastName}` // Combina nombre y apellido
-        })) : [];
-        const allUsers = [{ id: 'all', name: 'Todos los usuarios', fullName: 'Todos los usuarios' }, ...userData];
+        // Asegúrate de que el array de usuarios se mapee correctamente con name y lastName
+        const userData = Array.isArray(response.data) 
+          ? response.data.map(user => ({
+              id: user.id, // ID del usuario
+              name: user.name, // Nombre
+              lastName: user.lastName, // Apellido
+              fullName: `${user.name} ${user.lastName}` // Nombre completo
+            }))
+          : [];
+          
+        // Incluye la opción de "Todos los usuarios"
+        const allUsers = [{ id: 'all', fullName: 'Todos los usuarios' }, ...userData];
+        
+        // Asigna los usuarios a los estados
         setUsers(allUsers);
         setFilteredUsers(allUsers);
       } catch (error) {
         console.error('Error al obtener los usuarios', error);
-        const fallbackUsers = [{ id: 'all', name: 'Todos los usuarios', fullName: 'Todos los usuarios' }];
-        setUsers(fallbackUsers);
-        setFilteredUsers(fallbackUsers);
+        setUsers([{ id: 'all', fullName: 'Todos los usuarios' }]);
+        setFilteredUsers([{ id: 'all', fullName: 'Todos los usuarios' }]);
       }
     }
+    
     fetchUsers();
   }, []);
 
+  // Filtra los usuarios cada vez que cambia el término de búsqueda o los usuarios
   useEffect(() => {
     const filtered = users.filter(user =>
       user.fullName.toLowerCase().includes(searchTerm.toLowerCase())
@@ -62,7 +73,7 @@ export default function UserSelect({ onUserChange }) {
           className="w-[200px] justify-between dark:text-white"
         >
           {value
-            ? users.find((user) => user.id.toString() === value)?.fullName || "Seleccionar usuario..."
+            ? users.find((user) => user.id === value)?.fullName || "Seleccionar usuario..."
             : "Seleccionar usuario..."}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
@@ -72,7 +83,7 @@ export default function UserSelect({ onUserChange }) {
           <CommandInput 
             placeholder="Buscar usuario..." 
             value={searchTerm}
-            onValueChange={setSearchTerm}
+            onValueChange={(value) => setSearchTerm(value)} // Actualiza el término de búsqueda
           />
           <CommandList>
             {filteredUsers.length === 0 && (
@@ -86,9 +97,9 @@ export default function UserSelect({ onUserChange }) {
                     value={user.id.toString()}
                     onSelect={(currentValue) => {
                       const newValue = currentValue === value ? "" : currentValue;
-                      setValue(newValue);
-                      onUserChange(newValue);
-                      setOpen(false);
+                      setValue(newValue); // Actualiza el valor seleccionado
+                      onUserChange(newValue); // Envía el valor seleccionado al padre
+                      setOpen(false); // Cierra el popover
                     }}
                   >
                     <Check

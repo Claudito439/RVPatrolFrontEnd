@@ -2,6 +2,43 @@
 @tailwind components;
 @tailwind utilities;
 
+@media print {
+  /* Oculta el sidebar en impresión */
+   /* Estilo para que los botones de los encabezados parezcan texto al imprimir */
+  
+  /* Mantener los colores de fondo en los encabezados */
+  th {
+    background-color: #007bff !important; /* Color azul */
+    color: white !important; /* Texto blanco */
+  }
+
+  body {
+    transform: scale(0.9); /* Ajusta el tamaño de la pantalla, el valor puede ser entre 0.1 a 1 */
+    transform-origin: top; /* Establece el origen de la escala para que la página se ajuste desde la esquina superior izquierda */
+  }
+
+  /* Ajusta los márgenes si es necesario */
+  .sidebar {
+    display: none;
+  }
+
+  /* Ajuste para la tabla */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    padding: 8px;
+    border: 1px solid black;
+  }
+
+  /* Margen en la página impresa */
+  @page {
+    size: A3;
+    margin: 5mm;
+  }
+}
 
 @layer base {
   :root {/* Gradiente base */

@@ -7,13 +7,21 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Importar useNavigate
 
 export default function ReportsCard({ title, description, route }) {
   const [error, setError] = useState(null); // Estado para manejar los errores
+  const navigate = useNavigate(); // Usar useNavigate para la redirección
 
   const handlePrintClick = async () => {
     setError(null); // Resetear el error antes de hacer la solicitud
-    
+
+    // Si la ruta es "/reportTarea", redirigir con navigate en lugar de hacer la solicitud
+    if (route.includes("/reporteTareas")) {
+      navigate(route); // Usar navigate para redirigir
+      return;
+    }
+
     // Verificar si la ruta es "/api/v1/reports/ambushtask" sin userId
     if (route.includes("/api/v1/reports/ambushtask") && !route.includes("userId")) {
       setError("Debe seleccionar un usuario para generar el reporte.");
@@ -21,10 +29,10 @@ export default function ReportsCard({ title, description, route }) {
     }
 
     try {
-      const response = await fetch(`https://rvpatrolapibackend.onrender.com${route}`, {
+      const response = await fetch(route, {
         method: 'GET',
       });
-      
+
       if (!response.ok) {
         throw new Error(`Error ${response.status}: ${response.statusText}`);
       }

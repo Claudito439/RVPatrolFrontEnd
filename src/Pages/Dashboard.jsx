@@ -8,6 +8,8 @@ import { PatrolLength } from "@/components/charts/PatrolLength";
 import { PatrolsArea } from "@/components/charts/PatrolsArea";
 import { RecognitionRadar } from "@/components/charts/RecognitionRadar";
 import UserSelect from "@/components/UserSelect";
+import { PrintButton } from "@/components/Imprimir";
+import { PrintButtonE } from "@/components/PrintStadistic";
 
 export default function Dashboard() {
     const [selectedUser, setSelectedUser] = useState("all");
@@ -63,11 +65,13 @@ export default function Dashboard() {
 
     return (
         <main className=" ">
+        <div id="printable-area">
             <Title text="Dashboard" />
             <div className="my-4">
                 <UserSelect onUserChange={handleUserChange} />
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 my-5">
+            <PrintButtonE/>
+            <div   className="grid grid-cols-1 sm:grid-cols-2 gap-3 my-5">
                 <FormationRadar chartData={ambushes} />
                 <PatrolsArea chartData={patrols} />
                 {patrolsLen && <PatrolLength chartData={patrolsLen} />}
@@ -75,6 +79,7 @@ export default function Dashboard() {
                 <div className="col-span-2 ">
                     <RecognitionRadar chartData={recognitions} />
                 </div>
+            </div>
             </div>
         </main>
     )

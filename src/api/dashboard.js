@@ -1,6 +1,6 @@
 import axios from './axios';
 
-export const getAmbushes = async (userId) => userId === 'all'
+export const getAmbushes = async (userId) => userId === 'all' 
     ? await axios.get('/ambushes')
     : await axios.get(`/ambushes/user/${userId}`);
 
