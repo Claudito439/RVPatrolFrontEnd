@@ -17,16 +17,27 @@ const initialReports = [
 export default function Reports() {
     const [reports, setReports] = useState(initialReports);
     const [selectedUser, setSelectedUser] = useState("all"); // Estado para el usuario seleccionado
+    const [tasksEnabled, setTasksEnabled] = useState(false); // Estado para el checkbox de tareas
 
-    // Función para actualizar las rutas dinámicamente según el userId seleccionado
+    // Función para actualizar las rutas dinámicamente según el userId seleccionado y el estado del checkbox
     const updateReportsWithUserId = (userId) => {
         const updatedReports = initialReports.map((report) => {
-            // Solo modifica las rutas de emboscadas y combates para incluir el filtro de usuario
+            // Solo modifica las rutas de emboscadas y combates para incluir el filtro de usuario 
             if (report.title === "Emboscadas") {
-                return { ...report, route: `/api/v1/reports/ambushu?userId=${userId}` };
+                if (tasksEnabled) {
+                    return userId === "all" 
+                        ? { ...report, route: `/api/v1/reports/ambushtask` }
+                        : { ...report, route: `/api/v1/reports/ambushtask?userId=${userId}` };
+                } else {
+                    return userId === "all" 
+                        ? { ...report, route: `/api/v1/reports/ambushes` }
+                        : { ...report, route: `/api/v1/reports/ambushesu?userId=${userId}` };
+                }
             }
             if (report.title === "Combates") {
-                return { ...report, route: `/api/v1/reports/combatsu?userId=${userId}` };
+                return userId === "all" 
+                    ? { ...report, route: `/api/v1/reports/combats` }
+                    : { ...report, route: `/api/v1/reports/combatsu?userId=${userId}` };
             }
             // Las demás rutas permanecen sin cambios
             return report;
@@ -34,21 +45,36 @@ export default function Reports() {
         setReports(updatedReports); // Actualiza el estado con las nuevas rutas
     };
 
-    // Efecto para actualizar los reportes cada vez que cambie el usuario seleccionado
+    // Efecto para actualizar los reportes cada vez que cambie el usuario seleccionado o el estado del checkbox
     useEffect(() => {
         updateReportsWithUserId(selectedUser);
-    }, [selectedUser]);
+    }, [selectedUser, tasksEnabled]);
 
     // Maneja el cambio de usuario desde el UserSelect
     const handleUserChange = (userId) => {
         setSelectedUser(userId);
     };
 
+    // Maneja el cambio del checkbox de tareas
+    const handleTaskCheckboxChange = (event) => {
+        setTasksEnabled(event.target.checked);
+    };
+
     return (
         <main className=" ">
             <Title text="Reportes" />
-            <div className="my-4">
+            <div className="my-4 flex items-center">
                 <UserSelect onUserChange={handleUserChange} />
+                <div className="ml-4">
+                    <label>
+                        <input 
+                            type="checkbox" 
+                            checked={tasksEnabled} 
+                            onChange={handleTaskCheckboxChange} 
+                        />
+                        <span className="ml-2">Tareas</span>
+                    </label>
+                </div>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
                 {reports &&

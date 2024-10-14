@@ -17,7 +17,7 @@ export default function ReportsCard({ title, description, route }) {
         <CardDescription>{description}</CardDescription>
       </CardHeader>
       <CardFooter className="flex justify-between">
-        <a href={route} className="w-full">
+        <a href={"https://rvpatrolapibackend.onrender.com"+route} className="w-full">
           <Button className="w-full">
             Imprimir
           </Button>
