@@ -1,4 +1,5 @@
 import * as React from "react";
+//import { PrintButtonE } from "./PrintButtonE"; // Asegúrate de importar el componente PrintButtonE
 import {
   Card,
   CardContent,
@@ -29,14 +30,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
-// Función auxiliar para obtener valores anidados
-const getNestedValue = (obj, path) => path.split('.').reduce((acc, part) => acc && acc[part], obj);
+import { PrintButtonL } from "./ui/BotonImprimirRubrica";
 
 export const ambushColumns = [
   {
-    accessorFn: row => row.patrol?.created, // Usamos accessorFn en lugar de accessorKey
-    id: "date", // id necesaria cuando usamos accessorFn
+    accessorFn: row => row.patrol?.created,
+    id: "date",
     header: ({ column }) => (
       <Button
         variant="ghost"
@@ -47,13 +46,13 @@ export const ambushColumns = [
       </Button>
     ),
     cell: ({ row }) => {
-      const dateValue = row.original.patrol?.created; // Accedemos a la fecha
-      const formattedDate = dateValue ? new Date(dateValue).toLocaleDateString() : "Fecha no disponible"; // Verificamos que no sea undefined o null
+      const dateValue = row.original.patrol?.created;
+      const formattedDate = dateValue ? new Date(dateValue).toLocaleDateString() : "Fecha no disponible";
       return <div>{formattedDate}</div>;
     },
   },
   {
-    accessorFn: row => row.patrol?.user?.name, // Usamos accessorFn para manejar el valor anidado
+    accessorFn: row => row.patrol?.user?.name,
     id: "userName",
     header: ({ column }) => (
       <Button
@@ -65,7 +64,7 @@ export const ambushColumns = [
       </Button>
     ),
     cell: ({ row }) => {
-      const user = row.original.patrol?.user; // Accedemos a los datos del usuario
+      const user = row.original.patrol?.user;
       return <div>{user ? `${user.name} ${user.lastName}` : "Nombre no disponible"}</div>;
     },
   },
@@ -120,6 +119,14 @@ export const ambushColumns = [
       </Button>
     ),
     cell: ({ row }) => <div>{row.getValue("tasksNotCompleted")}</div>,
+  },
+  {
+    id: "actions",
+    header: "Acciones",
+    cell: ({ row }) => {
+      const ambushId = row.original.id; // Obtener el ID de la emboscada de la fila actual
+      return <PrintButtonL id={ambushId} />; // Pasa el ID de la emboscada al botón de impresión
+    },
   },
 ];
 

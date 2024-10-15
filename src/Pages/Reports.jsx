@@ -9,7 +9,7 @@ import { useState, useEffect } from "react";
 const initialReports = [
     { title: "Patrullaje", description: "Reporte de patrullajes", route: "https://rvpatrolapibackend.onrender.com/api/v1/reports/patrols" },
     { title: "Reconocimiento", description: "Reporte de reconocimiento", route: "https://rvpatrolapibackend.onrender.com/api/v1/reports/recognitions" },
-    { title: "Emboscadas", description: "Reporte de emboscadas", route: "https://rvpatrolapibackend.onrender.com/api/v1/reports/ambushes" },
+    { title: "Emboscadas", description: "Reporte de emboscadas", route: "/reporteTareas" },
     { title: "Combates", description: "Reportes de combates", route: "https://rvpatrolapibackend.onrender.com/api/v1/reports/combats" },
     { title: "Usuarios", description: "Reportes de usuarios registrados", route: "https://rvpatrolapibackend.onrender.com/api/v1/reports/users" }
 ];
@@ -30,8 +30,9 @@ export default function Reports() {
                         : { ...report, route: `/reporteTareas` };
                 } else {
                     return userId === "all" 
-                        ? { ...report, route: `https://rvpatrolapibackend.onrender.com/api/v1/reports/ambushes` }
-                        : { ...report, route: `https://rvpatrolapibackend.onrender.com/api/v1/reports/ambushesu?userId=${userId}` };
+                        ? { ...report, route: `/reporteTareas` }
+                        : { ...report, route: `/reporteTareas` }
+                        //: { ...report, route: `https://rvpatrolapibackend.onrender.com/api/v1/reports/ambushesu?userId=${userId}` };
                 }
             }
             if (report.title === "Combates") {
@@ -60,7 +61,7 @@ export default function Reports() {
         setTasksEnabled(event.target.checked);
     };
 
-    return (
+    /*return (
         <main className=" ">
             <Title text="Reportes" />
             <div className="my-4 flex items-center">
@@ -75,6 +76,21 @@ export default function Reports() {
                         <span className="ml-2 ">Tareas en Emboscada</span>
                     </label>
                 </div>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                {reports &&
+                    reports.map((report, index) => (
+                        <ReportsCard key={index} title={report.title} description={report.description} route={report.route} />
+                    ))}
+            </div>
+        </main>
+    );
+    */
+    return (
+        <main className=" ">
+            <Title text="Reportes" />
+            <div className="my-4 flex items-center">
+                <UserSelect onUserChange={handleUserChange} />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
                 {reports &&

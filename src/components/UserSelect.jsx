@@ -29,7 +29,6 @@ export default function UserSelect({ onUserChange }) {
     async function fetchUsers() {
       try {
         const response = await getUsers();
-        // Asegúrate de que el array de usuarios se mapee correctamente con name y lastName
         const userData = Array.isArray(response.data) 
           ? response.data.map(user => ({
               id: user.id, // ID del usuario
@@ -39,10 +38,8 @@ export default function UserSelect({ onUserChange }) {
             }))
           : [];
           
-        // Incluye la opción de "Todos los usuarios"
         const allUsers = [{ id: 'all', fullName: 'Todos los usuarios' }, ...userData];
         
-        // Asigna los usuarios a los estados
         setUsers(allUsers);
         setFilteredUsers(allUsers);
       } catch (error) {
@@ -78,7 +75,7 @@ export default function UserSelect({ onUserChange }) {
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
+      <PopoverContent className="w-[200px] p-0 z-50"> {/* Añadimos un z-index alto para asegurarnos que esté sobre otros elementos */}
         <Command>
           <CommandInput 
             placeholder="Buscar usuario..." 
