@@ -50,7 +50,7 @@ export default function Reports() {
             {
                 return userId === "all" 
                     ? { ...report, route: `https://rvpatrolapibackend.onrender.com/api/v1/reports/recognitions` }
-                    : { ...report, route: `https://rvpatrolapibackend.onrender.com/api/v1/reports/recognitionsu?userId=${userId}` }
+                    : { ...report, route: `https://rvpatrolapibackend.onrender.com/api/v1/reports/recognitionu?userId=${userId}` }
             }
             // Las demás rutas permanecen sin cambios
             return report;
