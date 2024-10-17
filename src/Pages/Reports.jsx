@@ -46,7 +46,7 @@ export default function Reports() {
                     ? { ...report, route: `https://rvpatrolapibackend.onrender.com/api/v1/reports/patrols` }
                     : { ...report, route: `https://rvpatrolapibackend.onrender.com/api/v1/reports/patrolsu?userId=${userId}` }
             }
-            if(report.tittle=="Reconocimiento")
+            if(report.title=="Reconocimiento")
             {
                 return userId === "all" 
                     ? { ...report, route: `https://rvpatrolapibackend.onrender.com/api/v1/reports/recognitions` }
