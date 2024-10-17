@@ -40,6 +40,18 @@ export default function Reports() {
                     ? { ...report, route: `https://rvpatrolapibackend.onrender.com/api/v1/reports/combats` }
                     : { ...report, route: `https://rvpatrolapibackend.onrender.com/api/v1/reports/combatsu?userId=${userId}` };
             }
+            if(reports.title == "Patrullaje")
+            {
+                return userId === "all" 
+                    ? { ...report, route: `https://rvpatrolapibackend.onrender.com/api/v1/reports/patrols` }
+                    : { ...report, route: `https://rvpatrolapibackend.onrender.com/api/v1/reports/patrolsu?userId=${userId}` }
+            }
+            if(reports.tittle=="Reconocimiento")
+            {
+                return userId === "all" 
+                    ? { ...report, route: `https://rvpatrolapibackend.onrender.com/api/v1/reports/recognitions` }
+                    : { ...report, route: `https://rvpatrolapibackend.onrender.com/api/v1/reports/recognitionsu?userId=${userId}` }
+            }
             // Las demás rutas permanecen sin cambios
             return report;
         });
