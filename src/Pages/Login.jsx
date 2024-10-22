@@ -38,9 +38,17 @@ export default function Login() {
         try {
             const response = await signin(data);
             //console.log(data)
-            if(response.data.user)navegate('/');
-            setModalMessage('Ingreso exitoso!');
-            setShowSuccessModal(true);
+            if(response.data.user && response.data.role=="Administrador")
+            {
+                setModalMessage('Ingreso exitoso!');
+                setShowSuccessModal(true);
+                navegate('/');
+            }
+            else{
+                setModalMessage('Usuario no administrador');
+                setShowErrorModal(true);
+            }
+           
         } catch (error) {
             setModalMessage('Contraseña o Nombre de Usuario incorrectos.');
             setShowErrorModal(true);
