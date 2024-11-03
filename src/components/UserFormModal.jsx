@@ -20,11 +20,13 @@ export function UserFormModal({ onSubmit }) {
             rank: '',
             ffaa: '',
             status: '',
+            role: '',
         }
     });
 
     const onSubmitForm = async (data) => {
         try {
+            console.log(data);
             await onSubmit(data);
             setSubmitResult({ success: true, message: 'Usuario añadido con éxito' });
             reset(); // Resetea el formulario
@@ -210,6 +212,29 @@ export function UserFormModal({ onSubmit }) {
                                         <SelectContent>
                                             <SelectItem value="Activo">Activo</SelectItem>
                                             <SelectItem value="Inactivo">Inactivo</SelectItem>
+
+                                        </SelectContent>
+                                    </Select>
+                                )}
+                            />
+                            {errors.rank && <p className="text-red-500 text-sm col-span-4 text-right">{errors.rank.message}</p>}
+                        </div>
+                        <div className="grid grid-cols-4 items-center gap-4">
+                            <Label htmlFor="role" className="text-right">
+                                Rol
+                            </Label>
+                            <Controller
+                                name="role"
+                                control={control}
+                                rules={{ required: 'Este campo es requerido' }}
+                                render={({ field }) => (
+                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                        <SelectTrigger className="col-span-3">
+                                            <SelectValue placeholder="Seleccione el estado" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            <SelectItem value="Usuario">Usuario</SelectItem>
+                                            <SelectItem value="Administrador">Administrador</SelectItem>
 
                                         </SelectContent>
                                     </Select>
