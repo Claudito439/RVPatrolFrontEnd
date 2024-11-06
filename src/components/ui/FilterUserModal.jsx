@@ -74,8 +74,19 @@ export default function UserSelectModal({ onClose }) {
         throw new Error(`Error ${response.status}: ${response.statusText}`);
       }
       const data = await response.json();
+      if(type === "approved")
+      {
+        exportAmbushTasksByUserPdf(data,`Emboscadas Aprobadas de ${data[0].patrol.user.name} ${data[0].patrol.user.lastName}`)
+      }
+      if(type === "rejected"){
+        exportAmbushTasksByUserPdf(data,`Emboscadas Reprobadas de ${data[0].patrol.user.name} ${data[0].patrol.user.lastName}`)
+      }
+      if(type === "all" )
+      {
       // Si todo sale bien, manejar la respuesta como un blob
       exportAmbushTasksByUserPdf(data,`Reporte de Emboscadas de ${data[0].patrol.user.name} ${data[0].patrol.user.lastName}`)
+      }
+
   
       console.log("Reporte generado y descargado con éxito.");
     } catch (error) {
