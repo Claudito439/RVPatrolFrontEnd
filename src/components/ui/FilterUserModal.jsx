@@ -18,6 +18,7 @@ import {
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { getUsers } from "@/api/users";
 import axios from "../../api/axios";
+import { exportAmbushTasksByUserPdf } from "../PDFs";
 
 
 export default function UserSelectModal({ onClose }) {
@@ -62,7 +63,7 @@ export default function UserSelectModal({ onClose }) {
   
     try {
       // Construir la URL con los parámetros necesarios
-      const route = `https://rvpatrolapibackend.onrender.com/api/v1/reports/ambushtask?userId=${selectedUser}&aprobado=${type === "approved"}&reprobado=${type === "rejected"}`;
+      const route = `https://rvpatrolapibackend.onrender.com/api/v1/ambushes/user/${selectedUser}?aprobacion=${type === "approved"}&reprobacion=${type === "rejected"}`;
   
       // Realizar la solicitud para obtener el archivo PDF
       const response = await fetch(route, {
@@ -72,18 +73,9 @@ export default function UserSelectModal({ onClose }) {
       if (!response.ok) {
         throw new Error(`Error ${response.status}: ${response.statusText}`);
       }
-  
+      const data = await response.json();
       // Si todo sale bien, manejar la respuesta como un blob
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(new Blob([blob], { type: 'application/pdf' }));
-      
-      // Crear un enlace temporal para la descarga del archivo
-      const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', `reporte-${type}.pdf`); // Nombre del archivo que se descargará
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link); // Eliminar el enlace después de la descarga
+      exportAmbushTasksByUserPdf(data,`Reporte de Emboscadas de ${data[0].patrol.user.name} ${data[0].patrol.user.lastName}`)
   
       console.log("Reporte generado y descargado con éxito.");
     } catch (error) {
